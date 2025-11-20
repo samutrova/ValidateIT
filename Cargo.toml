@@ -1,0 +1,17 @@
+[package]
+name = "validate_it"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix-cors = "0.7.1"
+actix-web = "4.11.0"
+chrono = "0.4.42"
+dotenv = "0.15.0"
+env_logger = "0.11.8"
+log = "0.4.28"
+regex = "1.12.2"
+reqwest = { version = "0.12.24", features = ["json"] }
+serde = { version = "1.0.228", features = ["derive"] }
+sqlx = { version = "0.8.6", features = ["mysql", "runtime-tokio-rustls"] }
+tokio = { version = "1.48.0", features = ["full"] }
