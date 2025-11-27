@@ -149,7 +149,7 @@ More examples on RapidAPI
 ### Pro Plan
 
 - **9 €/month**
-- **50,000 req/month**
+- **5,000 req/month**
 - Basic + **CF/PIVA/IBAN extraction**
 
 ### Ultra Plan
