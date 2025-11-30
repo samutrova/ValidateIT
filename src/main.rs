@@ -57,11 +57,11 @@ async fn main() -> io::Result<()> {
             .wrap(middleware::Logger::default())
             .wrap(middleware::Compress::default())
             .service(
-                web::scope("/fiscal-code")
+                web::scope("/cf")
                     .service(fiscal_code::validate_fiscal_code)
             )
             .service(
-                web::scope("/vat-number")
+                web::scope("/piva")
                     .service(vat_number::validate_vat_number)
             )
             .service(

@@ -11,18 +11,17 @@ impl ValidatorVatNumber {
             match Regex::new("^[0-9]{11}$") {
                 Ok(pattern) => pattern,
                 Err(err) => return Err(
-                    (format!("Regex error with pattern matching VAT number: {}", err), StatusCode::INTERNAL_SERVER_ERROR)
+                    (
+                        format!("Regex error with pattern matching VAT number: {}", err), 
+                        StatusCode::INTERNAL_SERVER_ERROR
+                    )
                 )
             };
         if !pattern.is_match(vat_number) {
-            return Err(("Invalid VAT number format".to_string(), StatusCode::BAD_REQUEST));
-        }
-
-        if vat_number.len() != 11 {
             return Ok(VatNumberResponse {
                 valid: false,
                 r#type: "vat_number".to_string(),
-                message: "VAT Number length must be 11".to_string(),
+                message: "Invalid VAT number format".to_string(),
                 checks: VatNumberChecks {
                     format: false,
                     office_code: false,

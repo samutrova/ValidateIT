@@ -23,26 +23,34 @@ const CHECK_LETTERS: [char; 26] = [
     'U', 'V', 'W', 'X', 'Y', 'Z'
 ];
 
+const OMOCODIA_TO_DIGIT: &[(&str, char)] = &[
+    ("L", '0'), ("M", '1'), ("N", '2'), ("P", '3'), ("Q", '4'),
+    ("R", '5'), ("S", '6'), ("T", '7'), ("U", '8'), ("V", '9'),
+];
+
+const OMOCODIA_POSITIONS: [usize; 7] = [6, 7, 9, 10, 12, 13, 14];
+
 pub struct ValidatorFiscalCode;
 
 impl ValidatorFiscalCode {
     pub async fn validate(fiscal_code: &str) -> Result<FiscalCodeResponse, (String, StatusCode)> {
+        let fiscal_code = fiscal_code.to_uppercase();
+        
         let pattern = 
-            match Regex::new("^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$") {
+            match Regex::new("^[A-Z]{6}[0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$") {
                 Ok(pattern) => pattern,
                 Err(err) => return Err(
-                    (format!("Regex error with pattern matching fiscal code: {}", err), StatusCode::INTERNAL_SERVER_ERROR)
+                    (
+                        format!("Regex error with pattern matching fiscal code: {}", err), 
+                        StatusCode::INTERNAL_SERVER_ERROR
+                    )
                 )
             };
-        if !pattern.is_match(fiscal_code) {
-            return Err(("Invalid fiscal code format".to_string(), StatusCode::BAD_REQUEST));
-        }
-
-        if fiscal_code.len() != 16 {
+        if !pattern.is_match(&fiscal_code) {
             return Ok(FiscalCodeResponse {
                 valid: false,
                 r#type: "fiscal_code".to_string(),
-                message: "Fiscal Code length must be 16".to_string(),
+                message: "Invalid fiscal code format".to_string(),
                 checks: FiscalCodeChecks {
                     format: false,
                     checksum: false
@@ -50,10 +58,23 @@ impl ValidatorFiscalCode {
             });
         }
 
-        let calculated_check_digit = calculate_check_digit(&fiscal_code[0..=14])?;
-        let check_digit = &fiscal_code[15..=15];
+        let fiscal_code = fiscal_code.chars().enumerate().map(|(i, c)| {
+            if OMOCODIA_POSITIONS.contains(&i) && c.is_alphabetic() {
+                OMOCODIA_TO_DIGIT.iter()
+                    .find(|&&(lett, _)| lett == c.to_string())
+                    .map(|&(_, digit)| digit)
+                    .unwrap_or(c)
+            } else {
+                c
+            }
+        }).collect::<String>();
 
-        if calculated_check_digit.to_string() != check_digit {
+        let fiscal_code_15 = &fiscal_code[..=14];
+        let check_digit = fiscal_code.as_bytes()[15] as char;
+
+        let calculated_check_digit = calculate_check_digit(fiscal_code_15)?;
+
+        if calculated_check_digit != check_digit {
             return Ok(FiscalCodeResponse {
                 valid: false,
                 r#type: "fiscal_code".to_string(),
