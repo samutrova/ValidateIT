@@ -48,8 +48,8 @@ impl ValidatorFiscalCode {
             };
         if !pattern.is_match(&fiscal_code) {
             return Ok(FiscalCodeResponse {
-                fiscal_code: fiscal_code.clone(),
-                original_fiscal_code: fiscal_code,
+                fiscal_code,
+                original_fiscal_code: "".to_string(),
                 valid: false,
                 r#type: "fiscal_code".to_string(),
                 message: "Invalid fiscal code format".to_string(),
@@ -111,7 +111,7 @@ fn calculate_check_digit(fiscal_code_15: &str) -> Result<char, (String, StatusCo
         let value = if c.is_numeric() {
             let digit = c.to_digit(10).unwrap() as usize;
 
-            if i % 2 == 0 { // Posizione dispari
+            if i % 2 == 0 {
                 ODD_VALUES[26 + digit]
             } else {
                 EVEN_VALUES[26 + digit]
@@ -119,7 +119,7 @@ fn calculate_check_digit(fiscal_code_15: &str) -> Result<char, (String, StatusCo
         } else {
             let letter_idx = (c as usize) - ('A' as usize);
 
-            if i % 2 == 0 { // Posizione dispari
+            if i % 2 == 0 {
                 ODD_VALUES[letter_idx]
             } else {
                 EVEN_VALUES[letter_idx]
