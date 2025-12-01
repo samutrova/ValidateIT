@@ -150,7 +150,7 @@ By using ValidateIT API, you acknowledge that:
 If you have questions about this disclaimer or the limitations of our Service:
 
 **Email:** legal@validateit.io  
-**Documentation:** https://docs.validateit.io
+**Documentation:** [Documentation](README.md)
 
 ---
 

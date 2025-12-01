@@ -9,7 +9,7 @@
 
 Every Italian developer wastes 20-40 hours implementing CF/PIVA/IBAN validations that then break when municipalities or algorithms change. We provide a battle-tested API that solves the problem in 5 minutes, always up to date, for €19/month.
 
-**Start the free trial** [ValidateIT](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-verification)
+**Start the free trial** [ValidateIT](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-validation)
 
 ## Examples
 
@@ -21,19 +21,19 @@ Every Italian developer wastes 20-40 hours implementing CF/PIVA/IBAN validations
 
 Bash
 ```bash
-curl -X GET "https://validateit-italian-document-verification.p.rapidapi.com/cf/{cf}/validate" -H "x-rapidapi-key: <your-api-key>" -H "x-rapidapi-host: validateit-italian-document-verification.p.rapidapi.com"
+curl -X GET "https://validateit-italian-document-validation.p.rapidapi.com/cf/{cf}/validate" -H "x-rapidapi-key: <your-api-key>" -H "x-rapidapi-host: validateit-italian-document-verification.p.rapidapi.com"
 ```
 
 Javascript
 ```javascript
 const cf = "RSSMRA85M01H501Z";
-const url = `https://validateit-italian-document-verification.p.rapidapi.com/cf/${cf}/validate`;
+const url = `https://validateit-italian-document-validation.p.rapidapi.com/cf/${cf}/validate`;
 
 const options = {
   method: 'GET',
   headers: {
     'x-rapidapi-key': '<your-api-key>',
-    'x-rapidapi-host': 'validateit-italian-document-verification.p.rapidapi.com'
+    'x-rapidapi-host': 'validateit-italian-document-validation.p.rapidapi.com'
   }
 };
 
@@ -48,7 +48,7 @@ Php
 <?php
 
 $cf = "RSSMRA85M01H501Z";
-$url = "https://validateit-italian-document-verification.p.rapidapi.com/cf/" . urlencode($cf) . "/validate";
+$url = "https://validateit-italian-document-validation.p.rapidapi.com/cf/" . urlencode($cf) . "/validate";
 
 $ch = curl_init();
 
@@ -56,7 +56,7 @@ curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'x-rapidapi-key: <your-api-key>',
-    'x-rapidapi-host: validateit-italian-document-verification.p.rapidapi.com'
+    'x-rapidapi-host: validateit-italian-document-validation.p.rapidapi.com.p.rapidapi.com'
 ]);
 
 $response = curl_exec($ch);
@@ -77,11 +77,11 @@ Python
 import requests
 
 cf = "RSSMRA85M01H501Z"
-url = f"https://validateit-italian-document-verification.p.rapidapi.com/cf/{cf}/validate"
+url = f"https://validateit-italian-document-validation.p.rapidapi.com/cf/{cf}/validate"
 
 headers = {
     "x-rapidapi-key": "<your-api-key>",
-    "x-rapidapi-host": "validateit-italian-document-verification.p.rapidapi.com"
+    "x-rapidapi-host": "validateit-italian-document-validation.p.rapidapi.com"
 }
 
 response = requests.get(url, headers=headers)
@@ -136,7 +136,7 @@ else:
 ```
 
 More examples on RapidAPI
-[More Examples](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-verification/playground/apiendpoint_4e534ae9-7f42-4a54-bd8b-b9da9aa07c8b)
+[More Examples](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-validation/playground/apiendpoint_daa9699c-cc22-4307-8149-4b7025ef2068)
 
 ## Plans
 
@@ -162,12 +162,12 @@ More examples on RapidAPI
 - **49 €/month**
 - **100,000 req/month**
 
-[See our plans for details](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-verification)
+[See our plans for details](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-validation)
 
 ## Issues
 
 If you encounter some bugs let we know!
-[Report Problems](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-verification/discussions)
+[Report Problems](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-validation/discussions)
 
 ## Legal & Compliance
 
@@ -279,9 +279,9 @@ You are solely responsible for:
 
 ## Links
 
-- [ValidateIT](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-verification)
+- [ValidateIT](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-validation)
 - [License](LICENSE)
-- [Issues](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-verification/discussions)
+- [Issues](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-validation/discussions)
 - [GitHub](https://github.com/samutrova/ValidateIT)
 
 - **[Terms of Service](TERMS_OF_SERVICE.md)** - Please read before using the API
