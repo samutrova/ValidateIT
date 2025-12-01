@@ -48,6 +48,8 @@ impl ValidatorFiscalCode {
             };
         if !pattern.is_match(&fiscal_code) {
             return Ok(FiscalCodeResponse {
+                fiscal_code: fiscal_code.clone(),
+                original_fiscal_code: fiscal_code,
                 valid: false,
                 r#type: "fiscal_code".to_string(),
                 message: "Invalid fiscal code format".to_string(),
@@ -58,7 +60,7 @@ impl ValidatorFiscalCode {
             });
         }
 
-        let fiscal_code = fiscal_code.chars().enumerate().map(|(i, c)| {
+        let original_fiscal_code = fiscal_code.chars().enumerate().map(|(i, c)| {
             if OMOCODIA_POSITIONS.contains(&i) && c.is_alphabetic() {
                 OMOCODIA_TO_DIGIT.iter()
                     .find(|&&(lett, _)| lett == c.to_string())
@@ -69,13 +71,15 @@ impl ValidatorFiscalCode {
             }
         }).collect::<String>();
 
-        let fiscal_code_15 = &fiscal_code[..=14];
-        let check_digit = fiscal_code.as_bytes()[15] as char;
+        let fiscal_code_15 = &original_fiscal_code[..=14];
+        let check_digit = original_fiscal_code.as_bytes()[15] as char;
 
         let calculated_check_digit = calculate_check_digit(fiscal_code_15)?;
 
         if calculated_check_digit != check_digit {
             return Ok(FiscalCodeResponse {
+                fiscal_code,
+                original_fiscal_code,
                 valid: false,
                 r#type: "fiscal_code".to_string(),
                 message: "Fiscal Code checksum is not valid".to_string(),
@@ -87,6 +91,8 @@ impl ValidatorFiscalCode {
         }
 
         Ok(FiscalCodeResponse {
+            fiscal_code,
+            original_fiscal_code,
             valid: true,
             r#type: "fiscal_code".to_string(),
             message: "Fiscal Code is valid".to_string(),
