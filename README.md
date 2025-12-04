@@ -7,7 +7,7 @@
 
 ## Problem
 
-Every Italian developer wastes 20-40 hours implementing CF/PIVA/IBAN validations that then break when municipalities or algorithms change. We provide a battle-tested API that solves the problem in 5 minutes, always up to date, for €19/month.
+Every Italian developer wastes 20-40 hours implementing CF/PIVA/IBAN validations that then break when municipalities or algorithms change. We provide a battle-tested API that solves the problem in 5 minutes, always up to date, for €9/month.
 
 **Start the free trial** [ValidateIT](https://rapidapi.com/samutrovarelli/api/validateit-italian-document-validation)
 
